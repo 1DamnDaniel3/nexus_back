@@ -1,0 +1,110 @@
+-- Таблица пользовательских аккаунтов
+CREATE TABLE user_account (
+    id SERIAL PRIMARY KEY,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,  -- хранится в зашифрованном виде
+    role VARCHAR(50) NOT NULL DEFAULT 'user',
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Таблица профилей пользователей
+CREATE TABLE user_profile (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL UNIQUE REFERENCES user_account(id) ON DELETE CASCADE,
+    name VARCHAR(100) NOT NULL,
+    phone VARCHAR(20),
+    city VARCHAR(100),
+    birthdate DATE,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Таблица жанров
+CREATE TABLE genres (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL UNIQUE
+);
+
+-- Таблица стран авторов
+CREATE TABLE author_countries (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL UNIQUE
+);
+
+-- Таблица языков книг
+CREATE TABLE book_languages (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL UNIQUE
+);
+
+-- Таблица книг
+CREATE TABLE books (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    author VARCHAR(255) NOT NULL,
+    year INTEGER,
+    genre_id INTEGER REFERENCES genres(id),
+    lang_id INTEGER REFERENCES book_languages(id),
+    country_id INTEGER REFERENCES author_countries(id),
+    img_url VARCHAR(255),
+    description TEXT,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Таблица книг пользователей
+CREATE TABLE user_books (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL REFERENCES user_account(id) ON DELETE CASCADE,
+    book_id INTEGER NOT NULL REFERENCES books(id) ON DELETE CASCADE,
+    condition VARCHAR(50) NOT NULL DEFAULT 'good',  -- new, good, acceptable
+    is_available BOOLEAN NOT NULL DEFAULT TRUE,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE (user_id, book_id)
+);
+
+-- Таблица методов доставки
+CREATE TABLE delivery_methods (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL UNIQUE,
+    description TEXT
+);
+
+-- Таблица запросов на обмен
+CREATE TABLE exchange_requests (
+    id SERIAL PRIMARY KEY,
+    book_id INTEGER NOT NULL REFERENCES books(id) ON DELETE CASCADE,
+    sender_id INTEGER NOT NULL REFERENCES user_account(id) ON DELETE CASCADE,
+    recipient_id INTEGER NOT NULL REFERENCES user_account(id) ON DELETE CASCADE,
+    delivery_method_id INTEGER REFERENCES delivery_methods(id),
+    status VARCHAR(50) NOT NULL DEFAULT 'pending',  -- pending, accepted, rejected, completed
+    request_message TEXT,
+    response_message TEXT,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    completed_at TIMESTAMP WITH TIME ZONE
+);
+
+-- Таблица отзывов
+CREATE TABLE reviews (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL REFERENCES user_account(id) ON DELETE CASCADE,
+    book_id INTEGER NOT NULL REFERENCES books(id) ON DELETE CASCADE,
+    comment TEXT NOT NULL,
+    rating INTEGER CHECK (rating BETWEEN 1 AND 5),
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE (user_id, book_id)
+);
+
+-- Создание индексов для улучшения производительности
+CREATE INDEX idx_user_account_email ON user_account(email);
+CREATE INDEX idx_books_name ON books(name);
+CREATE INDEX idx_books_author ON books(author);
+CREATE INDEX idx_user_books_user ON user_books(user_id);
+CREATE INDEX idx_user_books_book ON user_books(book_id);
+CREATE INDEX idx_exchange_requests_status ON exchange_requests(status);
+CREATE INDEX idx_exchange_requests_sender ON exchange_requests(sender_id);
+CREATE INDEX idx_exchange_requests_recipient ON exchange_requests(recipient_id);

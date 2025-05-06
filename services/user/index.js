@@ -1,0 +1,1 @@
+export {RegisterService, registerService} from './RegisterService.js'
