@@ -19,7 +19,7 @@ export class LoginController {
                 return res.status(404).json({ message: "Пользователь с таким email не найден" })
             }
 
-            const isPasswordValid = await bcrypt.compare(password, user.password_hash);
+            const isPasswordValid = await bcrypt.compare(password, user.password);
             if (!isPasswordValid) {
                 return res.status(401).json({ message: "Неверный пароль" })
 
