@@ -1,7 +1,7 @@
 import express from 'express'
 
 import { authMiddleware } from '../middleware/authMiddleware.js';
-import { baseExchangeController } from '../controllers/index.js'
+import { baseExchangeController, userExchangesController } from '../controllers/index.js'
 
 const router = express.Router();
 
@@ -15,6 +15,7 @@ router.delete('/exchanges/:id', authMiddleware, (req, res) => baseExchangeContro
 //ANOTHER ROUTES
 
 router.get('/exchanges/getExamples', (req, res) => baseExchangeController.exchangeExamples(req, res));
+router.post('/exchanges/getUserExchanges', (req, res) => userExchangesController.getAll(req, res));
 
 
 export { router };

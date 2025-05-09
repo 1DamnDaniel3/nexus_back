@@ -24,6 +24,7 @@ export class BaseExchangeController extends BaseController {
         }
 
     }
+
 }
 
 export const baseExchangeController = new BaseExchangeController;

@@ -6,7 +6,7 @@ export class ExchangeExamplesService {
             const examplesData = await ExchangeRequest.findAll({
                 where: { status: "completed" },
                 limit: 3,
-                attributes: ['id', 'status', 'created_at'], // Добавьте нужные атрибуты
+                attributes: ['id', 'status', 'created_at'], 
                 include: [
                     {
                         model: Book,
@@ -33,7 +33,6 @@ export class ExchangeExamplesService {
                 ]
             });
 
-            // Преобразуем структуру данных
             const simplifiedData = examplesData.map(item => ({
                 id: item.id,
                 status: item.status,
