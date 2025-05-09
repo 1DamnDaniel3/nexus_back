@@ -1,15 +1,48 @@
 import { DataTypes } from 'sequelize';
 import { sequelize } from '../connection.js';
 
-
 export const ExchangeRequest = sequelize.define('ExchangeRequest', {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true
     },
+    book_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+            model: 'books',
+            key: 'id'
+        },
+        onDelete: 'CASCADE'
+    },
+    sender_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+            model: 'user_account',
+            key: 'id'
+        },
+        onDelete: 'CASCADE'
+    },
+    recipient_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+            model: 'user_account',
+            key: 'id'
+        },
+        onDelete: 'CASCADE'
+    },
+    delivery_method_id: {
+        type: DataTypes.INTEGER,
+        references: {
+            model: 'delivery_methods',
+            key: 'id'
+        }
+    },
     status: {
-        type: DataTypes.STRING(50),
+        type: DataTypes.ENUM('pending', 'accepted', 'rejected', 'completed'),
         allowNull: false,
         defaultValue: 'pending'
     },

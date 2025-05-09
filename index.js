@@ -7,7 +7,8 @@ dotenv.config();
 
 
 import {
-  userRouter, authRouter, 
+  userRouter, authRouter, exchangeRouter,
+  
 } from './routes/index.js';
 
 const PORT = process.env.PORT || 3001;
@@ -27,6 +28,7 @@ app.use(cookieParser());
 
 app.use('/api/auth', authRouter);
 app.use('/api', userRouter);
+app.use('/api', exchangeRouter);
 
 
 app.listen(PORT, () => console.log(`server startet on post${PORT}`));
