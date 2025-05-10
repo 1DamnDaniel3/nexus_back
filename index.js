@@ -8,7 +8,8 @@ dotenv.config();
 
 import {
   userRouter, authRouter, exchangeRouter,
-  bookRouter, reviewRouter,
+  bookRouter, reviewRouter, deliveryRouter,
+
 } from './routes/index.js';
 
 const PORT = process.env.PORT || 3001;
@@ -31,6 +32,7 @@ app.use('/api', userRouter);
 app.use('/api', exchangeRouter);
 app.use('/api', bookRouter);
 app.use('/api', reviewRouter);
+app.use('/api', deliveryRouter);
 
 
 app.listen(PORT, () => console.log(`server startet on post${PORT}`));
