@@ -12,6 +12,7 @@ export {BaseReviewController, baseReviewController} from './review/index.js'
 export {BaseDeliveryController, baseDeliveryController} from './delivery/index.js'
 export {BaseCountriesController, baseCountriesController} from './countries/index.js'
 export {BaseGenresController, baseGenresController} from './genres/index.js'
+export {BaseFavoritesController, baseFavoritesController} from './favorite/index.js'
 
 
 

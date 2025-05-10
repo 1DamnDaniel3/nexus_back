@@ -30,14 +30,13 @@ export class RegisterService {
             try {
                 const newAccount = await UserAccount.create({
                     email: account.email,
-                    password: account.password, // Хеширование произойдет в хуке модели
-                    role: account.role || 'user'
+                    password: account.password, 
                 }, { transaction });
 
                 // Создаем запись в UserProfile
                 const newProfile = await UserProfile.create({
                     user_id: newAccount.id,
-                    name: account.name || '',
+                    name: profile.name || '',
                     phone: profile.phone || null,
                     city: profile.city || null,
                     birthdate: profile.birthday || null

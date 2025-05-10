@@ -1,0 +1,1 @@
+export {BaseFavoritesController, baseFavoritesController} from './BaseFavoritesController.js'
