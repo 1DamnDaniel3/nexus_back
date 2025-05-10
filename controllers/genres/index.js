@@ -1,0 +1,1 @@
+export {BaseGenresController, baseGenresController} from './BaseGenresController.js'

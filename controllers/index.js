@@ -10,5 +10,8 @@ export {
 export {BaseBookController, baseBookController} from './book/index.js'
 export {BaseReviewController, baseReviewController} from './review/index.js'
 export {BaseDeliveryController, baseDeliveryController} from './delivery/index.js'
+export {BaseCountriesController, baseCountriesController} from './countries/index.js'
+export {BaseGenresController, baseGenresController} from './genres/index.js'
+
 
 
