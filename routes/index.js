@@ -1,3 +1,5 @@
 export {default as authRouter} from './auth.js'
 export {router as userRouter} from './user.routes.js'
 export {router as exchangeRouter} from './exchange.routes.js'
+export {router as bookRouter} from './book.routes.js'
+export {router as reviewRouter} from './review.routes.js'

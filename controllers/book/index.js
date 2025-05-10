@@ -1,0 +1,1 @@
+export {BaseBookController, baseBookController} from './BaseBookController.js'
