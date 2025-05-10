@@ -41,9 +41,6 @@ ExchangeRequest.belongsTo(UserAccount, { foreignKey: 'recipient_id', as: 'Recipi
 UserAccount.hasMany(Review, { foreignKey: 'user_id' });
 Review.belongsTo(UserAccount, { foreignKey: 'user_id' });
 
-Book.hasMany(Review, { foreignKey: 'book_id' });
-Review.belongsTo(Book, { foreignKey: 'book_id' });
-
 UserAccount.hasMany(Favorite, { foreignKey: 'user_id' });
 Favorite.belongsTo(UserAccount, { foreignKey: 'user_id' });
 
