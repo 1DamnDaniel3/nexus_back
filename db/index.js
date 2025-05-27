@@ -4,7 +4,7 @@ import {
     AuthorCountry, Book, BookLanguage,
     DeliveryMethod, ExchangeRequest, Genre,
     Review, UserAccount, UserBook, UserProfile,
-    Favorite,
+    Favorite, EmailVerification
 } from './models/index.js'
 
 // user_account ↔ user_profile (1:1)
@@ -81,5 +81,5 @@ export {
     AuthorCountry, Book, BookLanguage,
     DeliveryMethod, ExchangeRequest, Genre,
     Review, UserAccount, UserBook, UserProfile,
-    Favorite,
+    Favorite, EmailVerification
 }

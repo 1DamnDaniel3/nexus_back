@@ -1,6 +1,7 @@
 export { BaseUserController, baseUserController } from './BaseUserController.js'
 export {
     BaseUserAccountController, baseUserAccountController,
-    UserBooksController, userBooksController
+    UserBooksController, userBooksController,
+    UserFavoritesController, userFavoritesController,
+    LoginController, loginController
 } from './userAccount/index.js'
-export { LoginController, loginController } from './userAccount/index.js'

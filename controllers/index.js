@@ -2,7 +2,8 @@ export {
     BaseUserAccountController, baseUserAccountController,
     BaseUserController, baseUserController,
     LoginController, loginController,
-    UserBooksController, userBooksController
+    UserBooksController, userBooksController,
+    UserFavoritesController, userFavoritesController
 } from './user/index.js'
 export {
     BaseExchangeController, baseExchangeController,
@@ -15,6 +16,7 @@ export { BaseCountriesController, baseCountriesController } from './countries/in
 export { BaseGenresController, baseGenresController } from './genres/index.js'
 export { BaseFavoritesController, baseFavoritesController } from './favorite/index.js'
 export { BaseLanguageController, baseLanguageController } from './bookLanguage/BaseBookLanguage.js'
+export { EmailVerifyController, emailVerifyController } from './emailVerifyController/EmailVerifyController.js'
 
 
 

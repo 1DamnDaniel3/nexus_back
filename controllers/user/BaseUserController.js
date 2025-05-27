@@ -8,7 +8,7 @@ export class BaseUserController {
                 return res.status(400).json({ message: "Invalid data" });
             }
 
-            const response = await registerService.RegisterUser(data);
+            const response = await registerService.registerUser(data);
             
             return res.status(201).json({ 
                 message: "User created successfully!", 

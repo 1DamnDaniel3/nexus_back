@@ -1,8 +1,11 @@
-export { RegisterService, registerService } from './user/index.js'
+export {
+    RegisterService, registerService,
+    UserBooksService, userBooksService,
+    UserFavoriteService, userFavoriteService
+} from './user/index.js'
 export {
     ExchangeExamplesService, exchangeExamplesService,
     UserExchangesService, userExchangesService,
 } from './exchange/index.js'
-export {GetUserFavorites, getUserFavorites} from './favorite/index.js'
-export {UserBooksService, userBooksService} from './user/UserBooksService.js'
+export { GetUserFavorites, getUserFavorites } from './favorite/index.js'
 

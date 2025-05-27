@@ -1,7 +1,7 @@
 import express from 'express'
 
 import { authMiddleware } from '../middleware/authMiddleware.js';
-import { baseUserController, loginController, userBooksController } from '../controllers/index.js'
+import { baseUserController, loginController, userBooksController, userFavoritesController } from '../controllers/index.js'
 
 const router = express.Router();
 
@@ -17,5 +17,6 @@ router.post('/users/login', (req, res) => loginController.userLogin(req, res));/
 router.post('/users/logout', (req, res) => loginController.userLogout(req, res));// logout
 
 router.post('/users/getBooks', authMiddleware, (req, res) => userBooksController.getUserBooks(req, res));// getBooks
+router.post('/users/getFavorites', authMiddleware, (req, res) => userFavoritesController.getUserFavorites(req, res));// getFavorites
 
 export { router };
