@@ -1,4 +1,4 @@
-import { UserAccount, UserProfile, Book } from "../../db/index.js";
+import { UserAccount, UserProfile, Book, Genre, BookLanguage, AuthorCountry } from "../../db/index.js";
 
 
 export class UserBooksService {
@@ -10,7 +10,13 @@ export class UserBooksService {
                 include: [{ model: UserProfile },
                 {
                     model: Book,
-                    through: { attributes: [] }
+                    through: { attributes: [] },
+                    include: [
+                        {model: Genre},
+                        {model: BookLanguage},
+                        {model: AuthorCountry},
+                    ]
+                    
                 }],
                 attributes: []
             })
