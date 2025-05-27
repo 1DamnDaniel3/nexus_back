@@ -1,4 +1,3 @@
--- Таблица пользовательских аккаунтов
 CREATE TABLE user_account (
     id SERIAL PRIMARY KEY,
     email VARCHAR(255) NOT NULL UNIQUE,
@@ -104,20 +103,8 @@ CREATE TABLE reviews (
     rating INTEGER CHECK (rating BETWEEN 1 AND 5),
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    UNIQUE (user_id, book_id)
+    UNIQUE (user_id)
 );
-
--- Создание индексов для улучшения производительности
-CREATE INDEX idx_user_account_email ON user_account(email);
-CREATE INDEX idx_books_name ON books(name);
-CREATE INDEX idx_books_author ON books(author);
-CREATE INDEX idx_user_books_user ON user_books(user_id);
-CREATE INDEX idx_user_books_book ON user_books(book_id);
-CREATE INDEX idx_exchange_requests_status ON exchange_requests(status);
-CREATE INDEX idx_exchange_requests_sender ON exchange_requests(sender_id);
-CREATE INDEX idx_exchange_requests_recipient ON exchange_requests(recipient_id);
-CREATE INDEX idx_favorites_user ON favorites(user_id);
-CREATE INDEX idx_favorites_book ON favorites(book_id);
 
 
 -- =================================== тест заполнение ==========================================
@@ -214,10 +201,10 @@ INSERT INTO exchange_requests (book_id, sender_id, recipient_id, delivery_method
 (6, 4, 6, 6, 'completed', 'Интересная книга, хочу обмен', 'Отправлю вам завтра');
 
 -- Заполнение таблицы отзывов
-INSERT INTO reviews (user_id, book_id, comment, rating) VALUES
-(1, 1, 'Шедевр! Перечитываю каждый год', 5),
-(2, 1, 'Сложно воспринимается, но интересно', 4),
-(3, 2, 'Пугающе актуально в наше время', 5),
-(4, 3, 'Люблю детективы Кристи, этот один из лучших', 5),
-(5, 4, 'Трогательная история на все времена', 5),
-(6, 5, 'Глубокое произведение, но сложное для понимания', 4);
+INSERT INTO reviews (user_id, comment, rating) VALUES
+(1, 'Шедевр! Перечитываю каждый год', 5),
+(2, 'Сложно воспринимается, но интересно', 4),
+(3, 'Пугающе актуально в наше время', 5),
+(4, 'Люблю детективы Кристи, этот один из лучших', 5),
+(5, 'Трогательная история на все времена', 5),
+(6, 'Глубокое произведение, но сложное для понимания', 4);

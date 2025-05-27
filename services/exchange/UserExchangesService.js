@@ -5,7 +5,6 @@ import { Op } from 'sequelize'
 export class UserExchangesService {
 
     async getUserExchanges(user_id, status) {
-
         try {
             const response = await ExchangeRequest.findAll({
                 attributes: ['id', 'status', 'request_message',
@@ -16,8 +15,6 @@ export class UserExchangesService {
                         { recipient_id: user_id, },
                     ],
                     status: status,
-
-
                 },
                 include: [{
                     model: Book,

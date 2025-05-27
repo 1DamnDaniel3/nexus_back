@@ -4,4 +4,5 @@ export {
     UserExchangesService, userExchangesService,
 } from './exchange/index.js'
 export {GetUserFavorites, getUserFavorites} from './favorite/index.js'
+export {UserBooksService, userBooksService} from './user/UserBooksService.js'
 

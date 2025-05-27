@@ -1,7 +1,8 @@
 export {
     BaseUserAccountController, baseUserAccountController,
     BaseUserController, baseUserController,
-    LoginController, loginController
+    LoginController, loginController,
+    UserBooksController, userBooksController
 } from './user/index.js'
 export {
     BaseExchangeController, baseExchangeController,

@@ -1,8 +1,7 @@
 import express from 'express'
 
 import { authMiddleware } from '../middleware/authMiddleware.js';
-import { baseUserController } from '../controllers/index.js'
-import { loginController } from '../controllers/index.js'
+import { baseUserController, loginController, userBooksController } from '../controllers/index.js'
 
 const router = express.Router();
 
@@ -16,5 +15,7 @@ router.delete('/users/:id', authMiddleware, (req, res) => baseUserController.del
 //ANOTHER ROUTES
 router.post('/users/login', (req, res) => loginController.userLogin(req, res));// login
 router.post('/users/logout', (req, res) => loginController.userLogout(req, res));// logout
+
+router.post('/users/getBooks', (req, res) => userBooksController.getUserBooks(req, res));// getBooks
 
 export { router };

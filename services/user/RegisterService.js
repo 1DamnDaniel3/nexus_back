@@ -2,20 +2,17 @@ import { UserAccount, UserProfile } from '../../db/index.js';
 
 export class RegisterService {
     async RegisterUser(data) {
-        // Валидация входящих данных
         if (!data || !data.account || !data.profile) {
             throw new Error('Invalid data structure');
         }
 
         const { account, profile } = data;
 
-        // Проверка обязательных полей
         if (!account.email || !account.password) {
             throw new Error('Email and password are required');
         }
 
         try {
-            // Проверяем, существует ли уже пользователь с таким email
             const existingUser = await UserAccount.findOne({
                 where: { email: account.email }
             });
@@ -24,7 +21,6 @@ export class RegisterService {
                 throw new Error('User with this email already exists');
             }
 
-            // Создаем запись в UserAccount в транзакции
             const transaction = await UserAccount.sequelize.transaction();
 
             try {
@@ -33,7 +29,6 @@ export class RegisterService {
                     password: account.password, 
                 }, { transaction });
 
-                // Создаем запись в UserProfile
                 const newProfile = await UserProfile.create({
                     user_id: newAccount.id,
                     name: profile.name || '',
@@ -42,7 +37,6 @@ export class RegisterService {
                     birthdate: profile.birthday || null
                 }, { transaction });
 
-                // Фиксируем транзакцию
                 await transaction.commit();
 
                 return {
@@ -61,7 +55,6 @@ export class RegisterService {
                 };
 
             } catch (error) {
-                // Откатываем транзакцию в случае ошибки
                 await transaction.rollback();
                 throw error;
             }
