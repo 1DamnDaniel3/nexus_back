@@ -16,6 +16,6 @@ router.delete('/users/:id', authMiddleware, (req, res) => baseUserController.del
 router.post('/users/login', (req, res) => loginController.userLogin(req, res));// login
 router.post('/users/logout', (req, res) => loginController.userLogout(req, res));// logout
 
-router.post('/users/getBooks', (req, res) => userBooksController.getUserBooks(req, res));// getBooks
+router.post('/users/getBooks', authMiddleware, (req, res) => userBooksController.getUserBooks(req, res));// getBooks
 
 export { router };
