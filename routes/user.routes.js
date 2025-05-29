@@ -1,16 +1,19 @@
 import express from 'express'
 
 import { authMiddleware } from '../middleware/authMiddleware.js';
-import { baseUserController, loginController, userBooksController, userFavoritesController } from '../controllers/index.js'
+import {
+    baseUserController, loginController, userBooksController,
+    userFavoritesController, baseUserAccountController
+} from '../controllers/index.js'
 
 const router = express.Router();
 
 //CRUD
 router.post('/users/registration', (req, res) => baseUserController.create(req, res));
-router.get('/users', authMiddleware, (req, res) => baseUserController.getAll(req, res));
-router.get('/users/:id', authMiddleware, (req, res) => baseUserController.getOne(req, res));
-router.put('/users/:id', authMiddleware, (req, res) => baseUserController.updateData(req, res));
-router.delete('/users/:id', authMiddleware, (req, res) => baseUserController.delete(req, res));
+router.get('/users', authMiddleware, (req, res) => baseUserAccountController.getAll(req, res));
+router.get('/users/:id', authMiddleware, (req, res) => baseUserAccountController.getOne(req, res));
+router.put('/users/:id', authMiddleware, (req, res) => baseUserAccountController.updateData(req, res));
+router.delete('/users/:id', authMiddleware, (req, res) => baseUserAccountController.delete(req, res));
 
 //ANOTHER ROUTES
 router.post('/users/login', (req, res) => loginController.userLogin(req, res));// login

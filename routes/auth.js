@@ -23,6 +23,7 @@ router.get('/check', (req, res) => {
         name: decoded.name,
         role: decoded.role,
         email: decoded.email,
+        is_blocked: decoded.is_blocked
       },
       
     });

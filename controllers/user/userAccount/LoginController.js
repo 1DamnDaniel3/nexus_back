@@ -31,6 +31,7 @@ export class LoginController {
                     name: user.name,
                     role: user.role,
                     email: user.email,
+                    is_blocked: user.is_blocked
                 },
                 this.JWT_SECRET,
                 { expiresIn: this.JWT_EXPIRES_IN }
@@ -48,7 +49,8 @@ export class LoginController {
                     id: user.id,
                     name: user.name,
                     email: user.email,
-                    role: user.role
+                    role: user.role,
+                    is_blocked: user.is_blocked
                 },
                 expiresIn: this.JWT_EXPIRES_IN
             })
