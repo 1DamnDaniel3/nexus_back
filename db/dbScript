@@ -3,6 +3,9 @@ CREATE TABLE user_account (
     email VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,  
     role VARCHAR(50) NOT NULL DEFAULT 'user',
+    is_blocked BOOLEAN NOT NULL DEFAULT FALSE,
+    blocked_at TIMESTAMP WITH TIME ZONE,
+    blocked_reason TEXT;
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
@@ -106,12 +109,25 @@ CREATE TABLE reviews (
     UNIQUE (user_id)
 );
 
+--Таблица для подтверждения email
 CREATE TABLE email_verifications (
     id SERIAL PRIMARY KEY,
     email VARCHAR(255) NOT NULL UNIQUE,
     code VARCHAR(10) NOT NULL,
     expires_at TIMESTAMP WITH TIME ZONE NOT NULL,
     verified BOOLEAN NOT NULL DEFAULT FALSE
+);
+
+-- Таблица для жалоб пользователей
+CREATE TABLE user_reports (
+    id SERIAL PRIMARY KEY,
+    reporter_id INTEGER NOT NULL REFERENCES user_account(id) ON DELETE CASCADE,  -- кто жалуется
+    reported_id INTEGER NOT NULL REFERENCES user_account(id) ON DELETE CASCADE,  -- на кого жалуются
+    reason TEXT NOT NULL,                 -- причина жалобы
+    status VARCHAR(50) DEFAULT 'pending'  -- статус жалобы: pending, reviewed, action_taken, dismissed
+        CHECK (status IN ('pending', 'reviewed', 'action_taken', 'dismissed')),
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    reviewed_at TIMESTAMP WITH TIME ZONE
 );
 
 

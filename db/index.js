@@ -1,15 +1,20 @@
 import { sequelize } from './connection.js';
 
 import {
-    AuthorCountry, Book, BookLanguage,
-    DeliveryMethod, ExchangeRequest, Genre,
-    Review, UserAccount, UserBook, UserProfile,
-    Favorite, EmailVerification
+  AuthorCountry, Book, BookLanguage,
+  DeliveryMethod, ExchangeRequest, Genre,
+  Review, UserAccount, UserBook, UserProfile,
+  Favorite, EmailVerification, UserReport
 } from './models/index.js'
 
 // user_account ↔ user_profile (1:1)
 UserAccount.hasOne(UserProfile, { foreignKey: 'user_id', onDelete: 'CASCADE' });
 UserProfile.belongsTo(UserAccount, { foreignKey: 'user_id' });
+
+UserReport.belongsTo(UserAccount, { foreignKey: 'reporter_id', as: 'reporter', onDelete: 'CASCADE' });
+UserAccount.hasMany(UserReport, { foreignKey: 'reporter_id', as: 'reports_sent', onDelete: 'CASCADE' });
+UserReport.belongsTo(UserAccount, { foreignKey: 'reported_id', as: 'reported', onDelete: 'CASCADE' });
+UserAccount.hasMany(UserReport, { foreignKey: 'reported_id', as: 'reports_received', onDelete: 'CASCADE' });
 
 // user_account ↔ user_books (M:N через through + userBook attributes)
 UserAccount.belongsToMany(Book, {
@@ -78,8 +83,8 @@ Review.belongsTo(UserAccount, { foreignKey: 'user_id' });
 
 
 export {
-    AuthorCountry, Book, BookLanguage,
-    DeliveryMethod, ExchangeRequest, Genre,
-    Review, UserAccount, UserBook, UserProfile,
-    Favorite, EmailVerification
+  AuthorCountry, Book, BookLanguage,
+  DeliveryMethod, ExchangeRequest, Genre,
+  Review, UserAccount, UserBook, UserProfile,
+  Favorite, EmailVerification, UserReport
 }

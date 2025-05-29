@@ -1,0 +1,1 @@
+export {BaseReportController, baseReportController} from './BaseReportsController.js'

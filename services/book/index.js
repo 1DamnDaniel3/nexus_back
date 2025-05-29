@@ -1,0 +1,1 @@
+export { BookRegService, bookRegService } from './BookRegService.js'

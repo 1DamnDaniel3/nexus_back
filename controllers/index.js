@@ -17,6 +17,7 @@ export { BaseGenresController, baseGenresController } from './genres/index.js'
 export { BaseFavoritesController, baseFavoritesController } from './favorite/index.js'
 export { BaseLanguageController, baseLanguageController } from './bookLanguage/BaseBookLanguage.js'
 export { EmailVerifyController, emailVerifyController } from './emailVerifyController/EmailVerifyController.js'
+export {BaseReportController, baseReportController} from './reports/index.js'
 
 
 

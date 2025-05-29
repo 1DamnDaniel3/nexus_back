@@ -10,7 +10,7 @@ import {
   userRouter, authRouter, verifyEmailRouter, exchangeRouter,
   bookRouter, reviewRouter, deliveryRouter,
   countryRouter, genreRouter, favoriteRouter,
-  languagesRouter
+  languagesRouter, reportsRouter
 
 } from './routes/index.js';
 
@@ -40,6 +40,7 @@ app.use('/api', genreRouter);
 app.use('/api', favoriteRouter);
 app.use('/api', languagesRouter);
 app.use('/api', verifyEmailRouter);
+app.use('/api', reportsRouter);
 
 
 app.listen(PORT, () => console.log(`server startet on post${PORT}`));

@@ -1,9 +1,7 @@
 import { DataTypes } from 'sequelize';
 import { sequelize } from '../connection.js';
-import  bcrypt from 'bcryptjs'
+import bcrypt from 'bcryptjs';
 
-
-// Модель пользовательских аккаунтов
 export const UserAccount = sequelize.define('UserAccount', {
     id: {
         type: DataTypes.INTEGER,
@@ -31,6 +29,19 @@ export const UserAccount = sequelize.define('UserAccount', {
         type: DataTypes.STRING(50),
         allowNull: false,
         defaultValue: 'user'
+    },
+    is_blocked: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false
+    },
+    blocked_at: {
+        type: DataTypes.DATE,
+        allowNull: true
+    },
+    blocked_reason: {
+        type: DataTypes.TEXT,
+        allowNull: true
     },
     created_at: {
         type: DataTypes.DATE,
