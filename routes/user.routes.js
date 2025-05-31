@@ -12,7 +12,7 @@ const router = express.Router();
 router.post('/users/registration', (req, res) => baseUserController.create(req, res));
 router.get('/users', authMiddleware, (req, res) => baseUserAccountController.getAll(req, res));
 router.get('/users/:id', authMiddleware, (req, res) => baseUserAccountController.getOne(req, res));
-router.put('/users/:id', authMiddleware, (req, res) => baseUserAccountController.updateData(req, res));
+router.put('/users/:id', (req, res) => baseUserAccountController.updateData(req, res));
 router.delete('/users/:id', authMiddleware, (req, res) => baseUserAccountController.delete(req, res));
 
 //ANOTHER ROUTES
