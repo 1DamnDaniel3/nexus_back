@@ -14,6 +14,7 @@ router.delete('/reports/:id', authMiddleware, (req, res) => baseReportController
 
 //ANOTHER ROUTES
 
+router.get('/reports/pending', authMiddleware, (req, res) => baseReportController.getPending(req, res));
 
 
 export { router };
