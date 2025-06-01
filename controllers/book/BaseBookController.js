@@ -1,6 +1,6 @@
 import { BaseController } from '../base.Controller.js'
 import { bookRegService } from '../../services/book/BookRegService.js'
-import { Book, Genre, AuthorCountry, BookLanguage } from '../../db/index.js'
+import { Book, Genre, AuthorCountry, BookLanguage, UserBook } from '../../db/index.js'
 
 
 export class BaseBookController extends BaseController {
@@ -11,6 +11,7 @@ export class BaseBookController extends BaseController {
                 { model: Genre },
                 { model: AuthorCountry },
                 { model: BookLanguage },
+                { model: UserBook,  },
             ]
         });
     }
