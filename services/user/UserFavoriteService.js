@@ -1,4 +1,4 @@
-import { UserAccount, UserProfile, Book, Favorite, Genre, BookLanguage, AuthorCountry } from "../../db/index.js";
+import { UserAccount, UserProfile, Book, Favorite, Genre, BookLanguage, AuthorCountry, UserBook } from "../../db/index.js";
 
 
 export class UserFavoriteService {
@@ -17,6 +17,7 @@ export class UserFavoriteService {
                             { model: Genre },
                             { model: BookLanguage },
                             { model: AuthorCountry },
+                            { model: UserBook },
                         ]
 
                     }]

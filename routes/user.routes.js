@@ -22,4 +22,7 @@ router.post('/users/logout', (req, res) => loginController.userLogout(req, res))
 router.post('/users/getBooks', authMiddleware, (req, res) => userBooksController.getUserBooks(req, res));// getBooks
 router.post('/users/getFavorites', authMiddleware, (req, res) => userFavoritesController.getUserFavorites(req, res));// getFavorites
 
+router.post('/users/getWithMail', (req, res) => baseUserAccountController.getWithEmail(req, res));
+
+
 export { router };
