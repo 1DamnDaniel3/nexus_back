@@ -1,6 +1,8 @@
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcryptjs'
 import { UserAccount } from '../../../db/index.js';
+import dotenv from 'dotenv'
+dotenv.config();
 
 export class LoginController {
     constructor() {

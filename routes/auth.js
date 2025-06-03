@@ -1,6 +1,8 @@
 // routes/auth.js
 import express from 'express';
 import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv'
+dotenv.config();
 
 const router = express.Router();
 
@@ -14,7 +16,7 @@ router.get('/check', (req, res) => {
   }
 
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET || 'MasterMarian');
+    const decoded = jwt.verify(token, process.env.JWT_SECRET || null);
     
     res.json({
       isAuthenticated: true,
