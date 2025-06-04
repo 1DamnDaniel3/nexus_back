@@ -17,7 +17,7 @@ export class BaseUserAccountController extends BaseController {
             const { email } = req.body;
             const response = await UserAccount.findOne({
                 where: { email: email },
-                attributes: ['id']
+                attributes: ['id', 'is_blocked', 'blocked_reason']
             })
             return res.status(200).json(response)
 
